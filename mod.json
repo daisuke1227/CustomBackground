@@ -1,0 +1,45 @@
+{
+	"geode": "2.0.0-beta.23",
+	"gd": {
+		"win": "2.204",
+		"android": "2.205",
+		"mac": "2.200"
+	},
+	"version": "v1.0.0",
+	"id": "camila314.custombg",
+	"name": "Custom Background",
+	"developer": "camila314",
+	"dependencies": [
+		{
+			"id": "alphalaneous.happy_textures",
+			"version": ">=v1.0.4"
+		}
+	],
+	"description": "Customize the background color and image. Check settings for more information.",
+	"settings": {
+		"color": {
+            "name": "Background Color",
+            "description": "Customize the color of the background.",
+            "type": "color",
+            "default": "0066FF"
+		},
+		"search_layer": {
+			"name": "Fix Search Colors",
+			"description": "Adjusts colors of the search layer to match the background.",
+			"type": "bool",
+			"default": true
+		},
+		"use_image": {
+			"name": "Use Custom Image",
+			"description": "Replace the background with a custom image.",
+			"type": "bool",
+			"default": false
+		},
+		"image": {
+			"name": "Background Image",
+			"description": "Customize the image of the background.",
+			"type": "file",
+			"default": "None Selected"
+		}
+	}
+}
