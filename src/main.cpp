@@ -15,6 +15,10 @@ class $modify(CCScale9Sprite) {
 
 	void visit() {
 		CCScale9Sprite::visit();
+
+		if (this == nullptr)
+			return;
+
 		if (!m_fields->m_hasFixed) {
 			fixSprites();
 			m_fields->m_hasFixed = true;
