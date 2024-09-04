@@ -16,9 +16,6 @@ class $modify(CCScale9Sprite) {
 	void visit() {
 		CCScale9Sprite::visit();
 
-		if (this == nullptr)
-			return;
-
 		if (!m_fields->m_hasFixed) {
 			fixSprites();
 			m_fields->m_hasFixed = true;
@@ -52,6 +49,9 @@ class $modify(CCScale9Sprite) {
 		for (int i = 0; i < 3; ++i) {
 			for (int j = 0; j < 3; ++j) {
 				auto sprite = sprites[i][j];
+
+				if (sprite == nullptr)
+					return;
 
 				auto tRect = sprite->getTextureRect();
 				auto diff = tRect.size - halfSize;
