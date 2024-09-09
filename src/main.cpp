@@ -84,9 +84,8 @@ class $modify(EditLevelLayer) {
 			changeOpaq("level-name-background", 105);
 			changeOpaq("description-background", 85);
 
-			auto spr = static_cast<CCTextInputNode*>(getChildByID("description-input"));
-			if (spr) {
-
+			auto inp = static_cast<CCTextInputNode*>(getChildByID("description-input"));
+			if (inp) {
 				col = ccc3(
 					std::min(col.r + 30, 255),
 					std::min(col.g + 30, 255),
@@ -94,11 +93,13 @@ class $modify(EditLevelLayer) {
 				);
 
 				Loader::get()->queueInMainThread([=]() {
-					spr->m_placeholderColor = col;
-					spr->m_textArea->colorAllLabels(col);
+					inp->m_placeholderColor = col;
+
+					if (inp->getString() == "")
+						inp->m_textArea->colorAllLabels(col);
 				});
 			} else {
-				log::error("Failed to find sprite: description-input");
+				log::error("Failed to find node: description-input");
 			}
 
 		}
