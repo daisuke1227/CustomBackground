@@ -5,7 +5,7 @@
 		"android": "2.206",
 		"mac": "2.206"
 	},
-	"version": "v1.1.2",
+	"version": "v1.1.3",
 	"id": "camila314.custombg",
 	"name": "Custom Background",
 	"developer": "camila314",
@@ -18,8 +18,8 @@
             "default": "0066FF"
 		},
 		"search_layer": {
-			"name": "Fix Search Colors",
-			"description": "Adjusts colors of the search layer to match the background.",
+			"name": "Fix Colors",
+			"description": "Adjusts colors of some layers to match the background.",
 			"type": "bool",
 			"default": true
 		},

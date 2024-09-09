@@ -1,13 +1,12 @@
 #include <Geode/Geode.hpp>
 #include <Geode/modify/CCSprite.hpp>
+#include <Geode/modify/EditLevelLayer.hpp>
 #include <Geode/modify/LevelSearchLayer.hpp>
 #include <Geode/modify/CCScale9Sprite.hpp>
 
 using namespace geode::prelude;
 using cocos2d::extension::CCScale9Sprite;
-
-#define $ $modify
-
+using cocos2d::CCSprite;
 class $modify(CCScale9Sprite) {
 	struct Fields {
 		bool m_hasFixed = false;
@@ -61,6 +60,50 @@ class $modify(CCScale9Sprite) {
 				transformSprite(sprite, CCSize(0, diff.height), i);
 			}
 		}
+	}
+};
+
+class $modify(EditLevelLayer) {
+	bool init(GJGameLevel* gl) {
+		EditLevelLayer::init(gl);
+
+		auto mod = Mod::get();
+		if (mod->getSettingValue<bool>("search_layer")) {
+			auto col = mod->getSettingValue<ccColor3B>("color");
+
+			auto changeOpaq = [=](char const* name, unsigned char opac) {
+				auto spr = static_cast<CCScale9Sprite*>(getChildByID(name));
+				if (spr) {
+					spr->setColor(ccc3(0, 0, 0));
+					spr->setOpacity(opac);
+				} else {
+					log::error("Failed to find sprite: {}", name);
+				}
+			};
+
+			changeOpaq("level-name-background", 105);
+			changeOpaq("description-background", 85);
+
+			auto spr = static_cast<CCTextInputNode*>(getChildByID("description-input"));
+			if (spr) {
+
+				col = ccc3(
+					std::min(col.r + 30, 255),
+					std::min(col.g + 30, 255),
+					std::min(col.b + 30, 255)
+				);
+
+				Loader::get()->queueInMainThread([=]() {
+					spr->m_placeholderColor = col;
+					spr->m_textArea->colorAllLabels(col);
+				});
+			} else {
+				log::error("Failed to find sprite: description-input");
+			}
+
+		}
+
+		return true;
 	}
 };
 
